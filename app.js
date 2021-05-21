@@ -339,13 +339,7 @@ app.get('/refresh_token', function(req, res) {
     }
   });
 });
-/*app.get('/auth/spotify',passport.authenticate('spotify'));
-app.get('/auth/spotify/callback/',passport.authenticate('spotify', { failureRedirect: '/auth/error' }),
-function(req, res) {
-  console.log(req.user.displayName);
- res.redirect("/"+req.user.displayName);
-});*/
-// app.get('search/:genre')
+
 app.get('/user/spotify/logout', (req, res) => {
   req.session = null;
   req.logout(); 
