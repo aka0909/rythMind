@@ -10,8 +10,7 @@ const ejs = require("ejs");
 const passport = require('passport');
 const formatMessage = require('./utils/messages');
 const axios=require("axios");
-// require('./passport');
-// const isLoggedIn = require('./Middleware/auth')
+
 const cookieSession = require('cookie-session')
 let port = process.env.PORT || 3000
 const app = express();
@@ -20,7 +19,7 @@ const server = http.createServer(app);
 
 const socketio = require('socket.io');
 
-// app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(passport.session());
 app.use(express.static("public"));
