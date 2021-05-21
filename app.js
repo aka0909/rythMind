@@ -405,30 +405,6 @@ app.get('/refresh_token', function(req, res) {
     json: true
   };
 
-  request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      var access_token = body.access_token;
-      res.send({
-        'access_token': access_token
-      });
-    }
-  });
-});
-/*app.get('/auth/spotify',passport.authenticate('spotify'));
-app.get('/auth/spotify/callback/',passport.authenticate('spotify', { failureRedirect: '/auth/error' }),
-function(req, res) {
-  console.log(req.user.displayName);
- res.redirect("/"+req.user.displayName);
-});
-// app.get('search/:genre')
-app.get('/user/spotify/logout', (req, res) => {
-  req.session = null;
-  req.logout(); 
-  res.redirect('/');
-})
-app.listen(port, function() {
-  console.log("Server started on port 3000.");
-});
-//
+
  
     };*/
