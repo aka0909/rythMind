@@ -388,4 +388,48 @@ app.listen(port, function() {
         'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
       },
       json: true
+     });
+  }
+  
+});
+app.get('/refresh_token', function(req, res) {
+
+  // requesting access token from refresh token
+  var refresh_token = req.query.refresh_token;
+  var authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+    form: {
+      grant_type: 'refresh_token',
+      refresh_token: refresh_token
+    },
+    json: true
+  };
+
+  request.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      var access_token = body.access_token;
+      res.send({
+        'access_token': access_token
+      });
+    }
+  });
+});
+/*app.get('/auth/spotify',passport.authenticate('spotify'));
+app.get('/auth/spotify/callback/',passport.authenticate('spotify', { failureRedirect: '/auth/error' }),
+function(req, res) {
+  console.log(req.user.displayName);
+ res.redirect("/"+req.user.displayName);
+});
+// app.get('search/:genre')
+app.get('/user/spotify/logout', (req, res) => {
+  req.session = null;
+  req.logout(); 
+  res.redirect('/');
+})
+app.listen(port, function() {
+  console.log("Server started on port 3000.");
+});
+//
+ 
     };*/
