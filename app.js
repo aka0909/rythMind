@@ -383,7 +383,26 @@ app.listen(port, function() {
       json: true
      });
   }
-  
+  axios('https://accounts.spotify.com/api/token', {
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Authorization' : 'Basic ' + ("948e691fc2cc42b99db55a783cc5be60"+ ':' + "71109d1b8abd445c933650a38bd759db" )      
+      },
+      data: 'grant_type=client_credentials',
+      method: 'POST'
+    })
+    .then(tokenResponse => {      
+      setToken(tokenResponse.data.access_token);
+      axios('https://api.spotify.com/v1/browse/categories?locale=sv_US', {
+        method: 'GET',
+        headers: { 'Authorization' : 'Bearer ' + tokenResponse.data.access_token}
+      })
+      .then (genreResponse => {        
+        console.log(genreResponse);
+        //res.render("index.ejs",{currentUser:req.params.name,searchResult:genreResponse});
+      });
+      
+    });
 });
 
 
